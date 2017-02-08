@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+    <!-- <base href="/"> -->
+    <head>
+        <title>
+            <%= name %>
+        </title>
+        <link href="http://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet" type="text/css">
+            <link href="<%= baseurl %>/assets/css/main.css" rel="stylesheet" type="text/css">
+            </link>
+        </link>
+    </head>
+    <body>
+        <div class="container">
+            <img src="<%= baseurl %>/assets/img/clementine_150.png"/>
+            <br/>
+            <p class="clementine-text">
+                <%= name %>
+            </p>
+        </div>
+        <div class="container">
+            <p>
+                You have clicked the button
+                <span id="click-nbr">
+                </span>
+                times.
+            </p>
+            <br/>
+            <div class="btn-container">
+                <button class="btn btn-add" id="clk" type="submit">
+                    CLICK ME!
+                </button>
+                <button class="btn btn-delete" id="rst">
+                    RESET
+                </button>
+            </div>
+        </div>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.6.0/annyang.min.js" type="text/javascript">
+        </script>
+        <script>
+            if (annyang) {
+
+            let openTab = function(url) {
+  var win = window.open(url, '_blank');
+  win.focus();
+};
+
+
+           // Let's define our first command. First the text we expect, and then the function it should call
+           var commands = {
+
+            // '*repeat': sayThis,
+             'hello': function() {
+               alert("Hi!!!");
+             },
+             'show me *name': function(name) {
+               alert(name);
+             },
+             'open new *command URL *name': function(command,name) {
+                  switch(command){
+                     case 'tab':
+                           openTab('http://'+name);
+                        break;
+                     default:
+                        break;
+                  }
+               }
+           };
+           annyang.debug();
+           annyang.addCommands(commands);
+
+
+           annyang.addCallback('result', function(phrases) {
+              console.log("I think the user said: ", phrases[0]);
+              console.log("But then again, it could be any of the following: ", phrases);
+            });
+
+           // Start listening. You can call this here, or attach this call to an event, button, etc.
+           annyang.start({continuous: false });
+         }else{
+            alert('not Supported');
+         }
+        </script>
+    </body>
+</html>
