@@ -1,6 +1,9 @@
 {
-    "name": "<%= name %>",
-    "version": "1.0.0",
-    "dependencies": {
-    }
+  "name": "<%= _.slugify(name) %>",
+  "version": "1.0.0",
+  "dependencies": {
+    <% if (includeBootstrap) { %>
+    "bootstrap": "^3.3.7"
+    <% } %>
+  }
 }
