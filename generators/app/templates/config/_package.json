@@ -11,5 +11,11 @@
     "webpack-dev-server": "^1.10.*"
   },
   "dependencies": {
+    <% if (props.useGulp) { %>
+      "gulp": "^3.9.1",
+   <% } %>
+   <% if (includeSass) { %>
+      "gulp-sass": "^2.3.2"
+   <% } %>
   }
 }

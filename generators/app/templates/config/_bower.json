@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "dependencies": {
     <% if (includeBootstrap) { %>
-    "bootstrap": "^3.3.7"
+    "bootstrap": "^3.3.7",
+    <% } %>
+    <% if (includeSass) { %>
+    "bootstrap-sass": "*"
     <% } %>
   }
 }
