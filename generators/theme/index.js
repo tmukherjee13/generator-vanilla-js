@@ -4,23 +4,9 @@ var chalk = require('chalk');
 var yosay = require('yosay');
 let _ = require('lodash-addons');
 module.exports = Generator.extend({
-  constructor(args, opts) {
-    super(args, opts);
-    // This makes `appname` a required argument.
-    this.argument('appname', {
-      type: String,
-      required: true
-    });
-    this.props = opts;
-    // And you can then access it later; e.g.
-    this.log(this.options.appname);
-  },
   prompting() {
-    // Have Yeoman greet the user.
-    // this.log(yosay(
-    //   'Welcome to the impressive ' + chalk.red('generator-vanilla-js') + ' generator!'
-    // ));
     // var prompts = [];
+    // this.log(this.options.theme);
     // return this.prompt(prompts)
     //   .then(function (props) {
     //     // To access props later use this.props.someAnswer;
@@ -28,15 +14,16 @@ module.exports = Generator.extend({
     //   }.bind(this));
   },
   writing() {
-    console.log(this.props.theme);
-    // this.fs.copyTpl(this.templatePath(this.theme + 'public/index.html'), this.destinationPath('public/index.html'), {
-    //   _: _,
-    //   name: this.name,
-    //   baseurl: this.url
-    // });
-    // this.fs.copy(this.templatePath(this.theme + 'public/assets'), this.destinationPath('public/assets'));
+    // console.log(this.options.theme);
+    this.fs.copyTpl(this.templatePath(this.options.theme + '/index.html'), this.destinationPath('public/index.html'), {
+      _: _,
+      name: this.name,
+      baseurl: this.url
+    });
+    this.fs.copy(this.templatePath(this.options.theme + '/assets'), this.destinationPath('public/assets'));
   },
   install() {
-    // this.installDependencies();
+    this.bowerInstall(['scrollreveal','magnific-popup','font-awesome'], { 'save': true });
+    this.installDependencies();
   }
 });

@@ -8,6 +8,8 @@ module.exports = Generator.extend({
   prompting() {
     // Have Yeoman greet the user.
     this.log(yosay('Welcome to the mind-blowing ' + chalk.red('vanilla js scaffold') + ' generator!'));
+
+
     let prompts = [{
       type: 'input',
       name: 'name',
@@ -47,7 +49,7 @@ module.exports = Generator.extend({
       type: 'confirm',
       name: 'theming',
       message: 'Would you like to setup a starter theme?',
-      default: false
+      default: true
     }, {
       when: function (props) {
         return props && props.theming;
@@ -109,14 +111,14 @@ module.exports = Generator.extend({
     // Copy application files
     let app = function () {
       if (this.props.theming) {
-        // this.composeWith(require.resolve('vanilla-js/generators/theme'), {
-        //   theme: this.props.theme
-        // });
-        this.composeWith('vanilla-js:theme', {
-          theme: this.props.theme,
-          name: this.props.name,
-          baseurl: this.props.url
+        this.composeWith(require.resolve('../theme'), {
+          theme: this.props.theme
         });
+        // this.composeWith('vanilla-js:theme', {
+        //   theme: this.props.theme,
+        //   name: this.props.name,
+        //   baseurl: this.props.url
+        // });
       }
       // this.fs.copyTpl(this.templatePath('public/index.html'), this.destinationPath('public/index.html'), {
       //   _: _,
@@ -131,6 +133,6 @@ module.exports = Generator.extend({
     app.call(this);
   },
   install: function () {
-    // this.installDependencies();
+    this.installDependencies();
   }
 });
