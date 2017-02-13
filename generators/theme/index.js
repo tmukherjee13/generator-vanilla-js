@@ -17,8 +17,8 @@ module.exports = Generator.extend({
     // console.log(this.options.theme);
     this.fs.copyTpl(this.templatePath(this.options.theme + '/index.html'), this.destinationPath('public/index.html'), {
       _: _,
-      name: this.name,
-      baseurl: this.url
+      name: this.options.name,
+      baseurl: this.options.url
     });
     this.fs.copy(this.templatePath(this.options.theme + '/assets'), this.destinationPath('public/assets'));
   },

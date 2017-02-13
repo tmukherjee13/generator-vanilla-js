@@ -58,8 +58,8 @@ module.exports = Generator.extend({
       name: 'theme',
       message: 'Which theme would you like to use?',
       choices: [{
-        name: 'Bootstrap',
-        value: 'cr',
+        name: 'Creative',
+        value: 'creative',
         checked: true
       }, {
         name: 'Test',
@@ -112,7 +112,9 @@ module.exports = Generator.extend({
     let app = function () {
       if (this.props.theming) {
         this.composeWith(require.resolve('../theme'), {
-          theme: this.props.theme
+          theme: this.props.theme,
+          name: this.props.name,
+          baseurl: this.props.url
         });
         // this.composeWith('vanilla-js:theme', {
         //   theme: this.props.theme,
